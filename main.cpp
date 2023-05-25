@@ -44,6 +44,14 @@ bool checkWin(string board[3][3]){
     return false;
 }
 
+bool validMove(int row, int col, string board[3][3]){
+    if (board[row][col] == "#"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 int main(){
     int xturn, oturn;
@@ -53,32 +61,43 @@ int main(){
         {"#", "#", "#"},
         {"#", "#", "#"}
     };
-    boardOut(board);
     bool gameOver = false;
     int row, col;
 
     while (!gameOver){
+        xmove:
+        boardOut(board);
         cout << "X's turn:" << endl << endl;
         cout << "Enter row: ";
         cin >> row;
         cout << "Enter col: ";
         cin >> col;
+        if (!validMove(row-1, col-1, board)){
+            system("cls");
+            cout << "Invalid move!" << endl << endl;
+            goto xmove;
+        }
         board[row-1][col-1] = "X";
         system("cls");
         xturn++;
-        boardOut(board);
         if (checkWin(board)){
             break;
         }
+        omove:
+        boardOut(board);
         cout << "O's turn:" << endl << endl;
         cout << "Enter row: ";
         cin >> row;
         cout << "Enter col: ";
         cin >> col;
+        if (!validMove(row-1, col-1, board)){
+            system("cls");
+            cout << "Invalid move!" << endl << endl;
+            goto omove;
+        }
         board[row-1][col-1] = "O";
         system("cls");
         oturn++;
-        boardOut(board);
         if (checkWin(board)){
             break;
         }
