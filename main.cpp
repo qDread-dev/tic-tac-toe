@@ -45,10 +45,14 @@ bool checkWin(string board[3][3]){
 }
 
 bool validMove(int row, int col, string board[3][3]){
-    if (board[row][col] == "#"){
-        return true;
-    }
-    else{
+    if (row < 3 && col < 3 && row >= 0 && col >= 0){
+        if (board[row][col] == "#"){
+            return true;
+        }
+        else {
+            return false;
+        }
+    } else {
         return false;
     }
 }
